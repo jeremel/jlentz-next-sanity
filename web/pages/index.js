@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  overflow: hidden !important;
+  overflow: hidden;
   background: var(--tan);
   min-height: 100vh;
   position: relative;
@@ -34,19 +34,39 @@ const Container = styled.div`
 const Header = styled.header`
   height: 100vh;
   color: var(--blue);
-  padding: 4rem 4rem 0 2rem;
   position: relative;
+  display: flex;
+  max-width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  flex-direction: column;
 
   .contactLinks {
     position: absolute;
     top: 50px;
-    right: 80px;
+    right: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    z-index: 100;
 
     a {
       color: var(--blue);
+    }
+
+    @media (max-width: 1000px) {
+      position: relative;
+      top: 0;
+      right: 0;
+      margin: 0;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 
@@ -56,8 +76,8 @@ const Header = styled.header`
     align-items: center;
 
     h1 {
-      font-size: 8rem;
-      margin: 2rem 0;
+      font-size: clamp(2.5rem, 0.6667rem + 8.1481vw, 8rem);
+      margin: 0 0 2rem 0;
       padding: 0;
       cursor: crosshair;
       line-height: 1;
@@ -66,32 +86,51 @@ const Header = styled.header`
     h1:active {
       cursor: cell;
     }
+
+    @media (max-width: 1000px) {
+      justify-content: center;
+    }
   }
 
-  .wrapper {
-    display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    gap: 4rem;
-    margin: 0.5rem 0;
+  .about {
+    p {
+      font-size: clamp(1.5rem, 1rem + 2.2222vw, 3rem);
+      margin-right: 10rem;
+      line-height: 1.25;
+      letter-spacing: 1.5px;
+      cursor: crosshair;
 
-    .about {
-      p {
-        font-size: 3rem;
-        margin-right: 10rem;
-        line-height: 1.25;
-        letter-spacing: 1.5px;
-        cursor: crosshair;
+      .me:hover {
+        color: var(--red);
+        cursor: cell;
+      }
 
-        span:hover {
-          /* text-decoration: underline;
-          text-decoration-style: wavy;
-          text-decoration-skip-ink: none;
-          text-decoration-color: var(--yellow);
-          text-underline-offset: 4px; */
-          color: var(--red);
+      .pines {
+        color: var(--blue);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--green);
           cursor: cell;
         }
+      }
+
+      .jerz {
+        text-decoration: none;
+        color: var(--blue);
+
+        &:hover {
+          color: var(--yellow);
+          cursor: cell;
+        }
+      }
+    }
+
+    @media (max-width: 1000px) {
+      text-align: center;
+
+      p {
+        margin: 0;
       }
     }
   }
@@ -107,12 +146,21 @@ const Services = styled.section`
   grid-template-areas: "svcImage services";
   place-items: right;
 
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "services services";
+  }
+
   .servicesImage {
     grid-area: svcImage;
 
     img {
       height: 100%;
       object-fit: cover;
+    }
+
+    @media (max-width: 1100px) {
+      display: none;
     }
   }
 
@@ -125,7 +173,7 @@ const Services = styled.section`
 
     .service {
       h2 {
-        font-size: 2.5rem;
+        font-size: clamp(1.5rem, 1.1667rem + 1.4815vw, 2.5rem);
         margin: 0 0 0.25rem 0;
         padding: 0;
         text-decoration: underline;
@@ -148,7 +196,7 @@ const Services = styled.section`
       }
 
       ul li {
-        font-size: 1.5rem;
+        font-size: clamp(1.25rem, 1.1667rem + 0.3704vw, 1.5rem);
         letter-spacing: 0.5px;
         cursor: crosshair;
       }
@@ -180,18 +228,20 @@ const Services = styled.section`
 const Contact = styled.footer`
   height: 100vh;
   color: var(--blue);
-  padding: 2rem;
+  /* padding: 2rem; */
+  max-width: 90%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   h3 {
-    font-size: 6rem;
+    font-size: clamp(4rem, 1.6692rem + 4.812vw, 6rem);
     margin: 0;
   }
 
   p {
-    font-size: 3rem;
+    font-size: clamp(2rem, 1.6667rem + 1.4815vw, 3rem);
     line-height: 1;
     letter-spacing: 1px;
     margin: 2rem 4rem 2rem 0;
@@ -200,16 +250,19 @@ const Contact = styled.footer`
   .myLinks {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-top: 2rem;
+    width: 100%;
 
     a {
       color: var(--blue);
       text-decoration-style: wavy;
       text-decoration-skip-ink: none;
       text-underline-offset: 5px;
-      font-size: 1.65rem;
+      font-size: clamp(1.35rem, 1.25rem + 0.4444vw, 1.65rem);
       letter-spacing: 0.65px;
+      margin: 0;
+      padding: 0;
       /* transition: all 0.25s ease-in; */
     }
 
@@ -224,6 +277,29 @@ const Contact = styled.footer`
       cursor: grabbing;
       text-decoration-color: var(--darkGrey);
       color: var(--darkGrey);
+    }
+
+    @media (max-width: 800px) {
+      justify-content: space-between;
+    }
+
+    @media (max-width: 500px) {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 800px) {
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 95%;
+
+    h3 {
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin: 0;
     }
   }
 `;
@@ -241,37 +317,42 @@ export default function Home() {
   const sq = gsap.utils.selector(servicesRef);
   const servicestl = useRef();
 
+  // Contact section timeline
+  const contactRef = useRef();
+  const cq = gsap.utils.selector(contactRef);
+  const contacttl = useRef();
+
   useEffect(() => {
-    gsap.utils.toArray(".panel").forEach((panel, i) => {
-      ScrollTrigger.create({
-        trigger: panel,
-        start: "top top",
-        pin: true,
-        scrub: 1,
-        // markers: true,
-        // id: "panel-marker",
+    // gsap.utils.toArray(".panel").forEach((panel, i) => {
+    //   ScrollTrigger.create({
+    //     trigger: panel,
+    //     start: "top top",
+    //     pin: true,
+    //     scrub: 1,
+    //     // markers: true,
+    //     // id: "panel-marker",
 
-        // base vertical scrolling on how wide the container is so it feels more natural
-        end: () => "+=" + containerRef.offsetWidth,
-      });
-    });
+    //     // base vertical scrolling on how wide the container is so it feels more natural
+    //     end: () => "+=" + containerRef.offsetWidth,
+    //   });
+    // });
 
-    ScrollTrigger.create({
-      // to snap the whole page to the closest section
-      snap: {
-        snapTo: 1 / 2,
-        // inertia: false,
-        duration: { min: 0.25, max: 0.25 },
-        ease: "power3.inOut",
-      },
-    });
+    // ScrollTrigger.create({
+    //   // to snap the whole page to the closest section
+    //   snap: {
+    //     snapTo: 1 / 2,
+    //     inertia: false,
+    //     duration: { min: 0.25, max: 0.25 },
+    //     ease: "power3.inOut",
+    //   },
+    // });
 
     // Header section timeline animations
     headertl.current = gsap
       .timeline()
       .fromTo(
         hq(".title"),
-        { opacity: 0, x: 100 },
+        { opacity: 0, x: 200 },
         {
           x: 0,
           opacity: 1,
@@ -314,7 +395,7 @@ export default function Home() {
         scrollTrigger: {
           trigger: ".panel2",
           start: "25% 80%",
-          markers: true,
+          // markers: true,
         },
       })
       .fromTo(
@@ -325,17 +406,56 @@ export default function Home() {
         },
         {
           y: 0,
-          // delay: 0.25,
           duration: 1,
           opacity: 1,
           ease: "power1.inOut",
-          // scrollTrigger: {
-          //   trigger: ".panel2",
-          //   start: "15% 80%",
-          //   markers: true,
-          //   // events: onEnter onLeave onEnterBack oneLeaveBack
-          //   toggleActions: "restart none reverse reset",
-          // },
+        }
+      );
+
+    // Contact section timeline animations
+    contacttl.current = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".panel3",
+          start: "25% 80%",
+          // markers: true,
+        },
+      })
+      .fromTo(
+        cq(".contactTitle"),
+        { opacity: 0, x: 200 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.in",
+        }
+      )
+      .fromTo(
+        cq(".contactText"),
+        { opacity: 0, y: 50 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.in",
+        }
+      )
+      .fromTo(
+        cq(".link"),
+        {
+          opacity: 0,
+          x: 300,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: {
+            // from: "end",
+            amount: 1,
+          },
+          ease: "power1.in",
         }
       );
   }, []);
@@ -357,7 +477,11 @@ export default function Home() {
       <Header className="panel" ref={headerRef}>
         <div className="contactLinks">
           {/* Email */}
-          <a href="mailto:jerlentz@gmail.com" className="contactLink">
+          <a
+            href="mailto:jerlentz@gmail.com"
+            className="contactLink"
+            aria-label="Email: jerlentz@gmail.com"
+          >
             <svg
               width="36"
               height="36"
@@ -386,6 +510,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
             className="contactLink"
+            aria-label="Twitter"
           >
             <svg
               width="34"
@@ -410,6 +535,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
             className="contactLink"
+            aria-label="Instagram"
           >
             <svg
               width="36"
@@ -445,6 +571,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
             className="contactLink"
+            aria-label="LinkedIn"
           >
             <svg
               width="36"
@@ -486,13 +613,30 @@ export default function Home() {
           <h1>jereme lentz</h1>
         </div>
 
-        <div className="wrapper">
-          <div className="about">
-            <p>
-              <span>Jereme Lentz</span> is a website developer who specializes
-              in building websites using creative solutions
-            </p>
-          </div>
+        <div className="about">
+          <p>
+            <span className="me">Jereme Lentz</span> is a developer based out of
+            the{" "}
+            <a
+              href="https://en.wikipedia.org/wiki/New_Jersey_Pine_Barrens"
+              className="pines"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pine Barrens
+            </a>{" "}
+            of{" "}
+            <a
+              href="https://en.wikipedia.org/wiki/South_Jersey"
+              className="jerz"
+              target="_blank"
+              rel="noreferrer"
+            >
+              southern New Jersey
+            </a>{" "}
+            who makes modern, responsive websites for businesses and other
+            organizations who are ready to step up their digital presence.
+          </p>
         </div>
       </Header>
 
@@ -510,6 +654,7 @@ export default function Home() {
               <li>Headless CMS integration</li>
               <li>UI design</li>
               <li>UX design</li>
+              <li>Existing website audit</li>
               <li>Technical consulting</li>
               <li>Project scoping</li>
               <li>Project management</li>
@@ -592,19 +737,22 @@ export default function Home() {
         </div>
       </Services>
 
-      <Contact className="panel">
-        <h3>let's work together</h3>
-        <p>
+      <Contact className="panel panel3" ref={contactRef}>
+        <h3 className="contactTitle">let&apos;s work together</h3>
+        <p className="contactText">
           Reach out to me via one of the channels below so we can give your
-          business a fresh, interactive website that doesn't blend in with all
-          of the boring template based websites that your competitors use.
+          business a fresh, interactive website that won&apos;t blend in with
+          all of the boring template based websites that your competitors use.
         </p>
         <div className="myLinks">
-          <a href="mailto:jerlentz@gmail.com">jerlentz@gmail.com</a>
+          <a href="mailto:jerlentz@gmail.com" className="link">
+            jerlentz@gmail.com
+          </a>
           <a
             href="https://twitter.com/jereme_l"
             target="_blank"
             rel="noreferrer"
+            className="link"
           >
             twitter
           </a>
@@ -612,6 +760,7 @@ export default function Home() {
             href="https://www.instagram.com/jeremel/"
             target="_blank"
             rel="noreferrer"
+            className="link"
           >
             instagram
           </a>
@@ -619,6 +768,7 @@ export default function Home() {
             href="https://www.linkedin.com/in/jereme-lentz-03560ab6/"
             target="_blank"
             rel="noreferrer"
+            className="link"
           >
             linkedin
           </a>
