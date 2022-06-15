@@ -32,7 +32,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 100vh;
+  height: 110vh;
   color: var(--blue);
   position: relative;
   display: flex;
@@ -40,6 +40,11 @@ const Header = styled.header`
   margin: 0 auto;
   justify-content: center;
   flex-direction: column;
+
+  @media (max-width: 900px) {
+    justify-content: flex-start;
+    margin-top: 6rem;
+  }
 
   .contactLinks {
     position: absolute;
@@ -54,14 +59,15 @@ const Header = styled.header`
       color: var(--blue);
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 900px) {
       position: relative;
       top: 0;
       right: 0;
       margin: 0;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
+      /* justify-content: center; */
+      justify-content: flex-start;
+      /* align-items: center; */
 
       a {
         margin: 0;
@@ -72,23 +78,27 @@ const Header = styled.header`
 
   .title {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
     h1 {
-      font-size: clamp(2.5rem, 0.6667rem + 8.1481vw, 8rem);
+      font-size: clamp(4.8rem, 3.8486rem + 4.6126vw, 8rem);
       margin: 0 0 2rem 0;
       padding: 0;
       cursor: crosshair;
       line-height: 1;
+
+      &:active {
+        cursor: cell;
+      }
+
+      @media (max-width: 832px) {
+        line-height: 1.1;
+      }
     }
 
-    h1:active {
-      cursor: cell;
-    }
-
-    @media (max-width: 1000px) {
-      justify-content: center;
+    @media (max-width: 900px) {
+      margin: 0;
+      align-items: flex-start;
     }
   }
 
@@ -127,17 +137,21 @@ const Header = styled.header`
     }
 
     @media (max-width: 1000px) {
-      text-align: center;
-
       p {
-        margin: 0;
+        margin: 2rem 2rem 0 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      p {
+        margin: 2rem 0 0 0;
       }
     }
   }
 `;
 
 const Services = styled.section`
-  height: 100vh;
+  height: 110vh;
   width: 100%;
   background: var(--blue);
   color: var(--tan);
@@ -236,7 +250,7 @@ const Contact = styled.footer`
   justify-content: center;
 
   h3 {
-    font-size: clamp(4rem, 1.6692rem + 4.812vw, 6rem);
+    font-size: clamp(4rem, 3.4054rem + 2.8829vw, 6rem);
     margin: 0;
   }
 
@@ -279,23 +293,20 @@ const Contact = styled.footer`
       color: var(--darkGrey);
     }
 
-    @media (max-width: 800px) {
-      justify-content: space-between;
-    }
-
-    @media (max-width: 500px) {
-      justify-content: flex-start;
+    @media (max-width: 550px) {
+      flex-direction: column;
+      gap: 0.5rem;
     }
   }
 
   @media (max-width: 800px) {
-    align-items: center;
     justify-content: flex-start;
     max-width: 95%;
+    height: auto;
 
     h3 {
       line-height: 1;
-      margin-bottom: 1rem;
+      margin: 4rem 0 2rem 0;
     }
 
     p {
@@ -475,6 +486,10 @@ export default function Home() {
       </Head>
 
       <Header className="panel" ref={headerRef}>
+        <div className="title">
+          <h1>jereme lentz</h1>
+        </div>
+
         <div className="contactLinks">
           {/* Email */}
           <a
@@ -508,7 +523,7 @@ export default function Home() {
           <a
             href="https://twitter.com/jereme_l"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="contactLink"
             aria-label="Twitter"
           >
@@ -533,7 +548,7 @@ export default function Home() {
           <a
             href="https://www.instagram.com/jeremel/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="contactLink"
             aria-label="Instagram"
           >
@@ -569,7 +584,7 @@ export default function Home() {
           <a
             href="https://www.linkedin.com/in/jereme-lentz-03560ab6/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="contactLink"
             aria-label="LinkedIn"
           >
@@ -607,10 +622,6 @@ export default function Home() {
               />
             </svg>
           </a>
-        </div>
-
-        <div className="title">
-          <h1>jereme lentz</h1>
         </div>
 
         <div className="about">
