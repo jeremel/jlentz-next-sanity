@@ -1,7 +1,7 @@
 // ./studio/resolveProductionUrl.js
 
 // Any random string, must match SANITY_PREVIEW_SECRET in the Next.js .env.local file
-const previewSecret = "jlentz-next-sanity-08215";
+const previewSecret = "08401-sanity-08215";
 
 // Replace `remoteUrl` with your deployed Next.js site
 const remoteUrl = `https://your-nextjs-site.com`;
