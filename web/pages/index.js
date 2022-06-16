@@ -503,7 +503,7 @@ export default function Home() {
           ease: "power1.in",
         }
       );
-  }, []);
+  }, [hq, sq, cq]);
 
   return (
     <Container ref={containerRef}>
