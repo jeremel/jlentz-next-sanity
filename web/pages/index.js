@@ -343,169 +343,167 @@ export default function Home() {
   const cq = gsap.utils.selector(contactRef);
   const contacttl = useRef();
 
-  if (typeof window !== "undefined") {
-    useLayoutEffect(() => {
-      // gsap.utils.toArray(".panel").forEach((panel, i) => {
-      //   ScrollTrigger.create({
-      //     trigger: panel,
-      //     start: "top top",
-      //     pin: true,
-      //     scrub: 1,
-      //     // markers: true,
-      //     // id: "panel-marker",
+  useLayoutEffect(() => {
+    // gsap.utils.toArray(".panel").forEach((panel, i) => {
+    //   ScrollTrigger.create({
+    //     trigger: panel,
+    //     start: "top top",
+    //     pin: true,
+    //     scrub: 1,
+    //     // markers: true,
+    //     // id: "panel-marker",
 
-      //     // base vertical scrolling on how wide the container is so it feels more natural
-      //     end: () => "+=" + containerRef.offsetWidth,
-      //   });
-      // });
+    //     // base vertical scrolling on how wide the container is so it feels more natural
+    //     end: () => "+=" + containerRef.offsetWidth,
+    //   });
+    // });
 
-      // ScrollTrigger.create({
-      //   // to snap the whole page to the closest section
-      //   snap: {
-      //     snapTo: 1 / 2,
-      //     inertia: false,
-      //     duration: { min: 0.25, max: 0.25 },
-      //     ease: "power3.inOut",
-      //   },
-      // });
+    // ScrollTrigger.create({
+    //   // to snap the whole page to the closest section
+    //   snap: {
+    //     snapTo: 1 / 2,
+    //     inertia: false,
+    //     duration: { min: 0.25, max: 0.25 },
+    //     ease: "power3.inOut",
+    //   },
+    // });
 
-      // Header section timeline animations
-      headertl.current = gsap
-        .timeline()
-        .fromTo(
-          hq(".title"),
-          { opacity: 0, x: 200 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.in",
-          }
-        )
-        .fromTo(
-          hq(".about"),
-          { opacity: 0, y: 100 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.in",
-          }
-        )
-        .fromTo(
-          hq(".contactLink"),
-          {
-            opacity: 0,
-            y: -50,
+    // Header section timeline animations
+    headertl.current = gsap
+      .timeline()
+      .fromTo(
+        hq(".title"),
+        { opacity: 0, x: 200 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.in",
+        }
+      )
+      .fromTo(
+        hq(".about"),
+        { opacity: 0, y: 100 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.in",
+        }
+      )
+      .fromTo(
+        hq(".contactLink"),
+        {
+          opacity: 0,
+          y: -50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: {
+            from: "end",
+            amount: 0.25,
           },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            stagger: {
-              from: "end",
-              amount: 0.25,
-            },
-            ease: "power3.in",
-          },
-          "-=0.65"
-        );
+          ease: "power3.in",
+        },
+        "-=0.65"
+      );
 
-      // Services section timeline animations
-      servicestl.current = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".service1",
-            start: "0% 80%",
-            // markers: true,
-            // id: "service1",
-          },
-        })
-        .fromTo(
-          sq(".service1"),
-          {
-            opacity: 0,
-            y: 100,
-          },
-          {
-            y: 0,
-            duration: 1,
-            opacity: 1,
-            ease: "power1.inOut",
-          }
-        );
+    // Services section timeline animations
+    servicestl.current = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".service1",
+          start: "0% 80%",
+          // markers: true,
+          // id: "service1",
+        },
+      })
+      .fromTo(
+        sq(".service1"),
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          y: 0,
+          duration: 1,
+          opacity: 1,
+          ease: "power1.inOut",
+        }
+      );
 
-      servicestl.current = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".service2",
-            start: "0% 80%",
-            // markers: true,
-            // id: "service2",
-          },
-        })
-        .fromTo(
-          sq(".service2"),
-          {
-            opacity: 0,
-            y: 100,
-          },
-          {
-            y: 0,
-            duration: 1,
-            opacity: 1,
-            ease: "power1.inOut",
-          }
-        );
+    servicestl.current = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".service2",
+          start: "0% 80%",
+          // markers: true,
+          // id: "service2",
+        },
+      })
+      .fromTo(
+        sq(".service2"),
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          y: 0,
+          duration: 1,
+          opacity: 1,
+          ease: "power1.inOut",
+        }
+      );
 
-      // Contact section timeline animations
-      contacttl.current = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".panel3",
-            start: "25% 80%",
-            // markers: true,
+    // Contact section timeline animations
+    contacttl.current = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".panel3",
+          start: "25% 80%",
+          // markers: true,
+        },
+      })
+      .fromTo(
+        cq(".contactTitle"),
+        { opacity: 0, x: 200 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.in",
+        }
+      )
+      .fromTo(
+        cq(".contactText"),
+        { opacity: 0, y: 50 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.in",
+        }
+      )
+      .fromTo(
+        cq(".link"),
+        {
+          opacity: 0,
+          x: 300,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: {
+            // from: "end",
+            amount: 1,
           },
-        })
-        .fromTo(
-          cq(".contactTitle"),
-          { opacity: 0, x: 200 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.in",
-          }
-        )
-        .fromTo(
-          cq(".contactText"),
-          { opacity: 0, y: 50 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.in",
-          }
-        )
-        .fromTo(
-          cq(".link"),
-          {
-            opacity: 0,
-            x: 300,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: {
-              // from: "end",
-              amount: 1,
-            },
-            ease: "power1.in",
-          }
-        );
-    }, []);
-  }
+          ease: "power1.in",
+        }
+      );
+  }, []);
 
   return (
     <Container ref={containerRef}>
