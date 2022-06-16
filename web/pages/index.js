@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,13 +37,14 @@ const Header = styled.header`
   position: relative;
   display: flex;
   max-width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   justify-content: center;
   flex-direction: column;
 
   @media (max-width: 900px) {
     justify-content: flex-start;
-    margin-top: 6rem;
+    margin-top: 2rem;
+    height: auto;
   }
 
   .contactLinks {
@@ -57,6 +58,10 @@ const Header = styled.header`
 
     a {
       color: var(--blue);
+
+      &:hover {
+        color: var(--yellow);
+      }
     }
 
     @media (max-width: 900px) {
@@ -65,9 +70,7 @@ const Header = styled.header`
       right: 0;
       margin: 0;
       flex-direction: row;
-      /* justify-content: center; */
       justify-content: flex-start;
-      /* align-items: center; */
 
       a {
         margin: 0;
@@ -144,14 +147,14 @@ const Header = styled.header`
 
     @media (max-width: 500px) {
       p {
-        margin: 2rem 0 0 0;
+        margin: 2rem 0 4rem 0;
       }
     }
   }
 `;
 
 const Services = styled.section`
-  height: 110vh;
+  min-height: 100vh;
   width: 100%;
   background: var(--blue);
   color: var(--tan);
@@ -161,8 +164,9 @@ const Services = styled.section`
   place-items: right;
 
   @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-    grid-template-areas: "services services";
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .servicesImage {
@@ -172,10 +176,6 @@ const Services = styled.section`
       height: 100%;
       object-fit: cover;
     }
-
-    @media (max-width: 1100px) {
-      display: none;
-    }
   }
 
   .services {
@@ -183,9 +183,21 @@ const Services = styled.section`
     flex-wrap: wrap;
     grid-area: services;
     place-self: center;
-    /* padding-left: 4rem; */
+    margin-bottom: 2rem;
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
 
     .service {
+      width: 300px;
+
+      @media (max-width: 615px) {
+        text-align: center;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
       h2 {
         font-size: clamp(1.5rem, 1.1667rem + 1.4815vw, 2.5rem);
         margin: 0 0 0.25rem 0;
@@ -207,6 +219,10 @@ const Services = styled.section`
         margin: 0 2rem 0 0;
         padding: 0;
         list-style: none;
+
+        @media (max-width: 615px) {
+          margin: 0;
+        }
       }
 
       ul li {
@@ -229,8 +245,6 @@ const Services = styled.section`
       }
 
       ul li a:last-child:hover {
-        text-decoration: underline;
-        text-decoration-style: wavy;
         text-decoration-skip-ink: none;
         text-decoration-color: var(--yellow);
         text-underline-offset: 4px;
@@ -240,11 +254,10 @@ const Services = styled.section`
 `;
 
 const Contact = styled.footer`
-  height: 100vh;
+  min-height: 100vh;
   color: var(--blue);
-  /* padding: 2rem; */
   max-width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -277,13 +290,11 @@ const Contact = styled.footer`
       letter-spacing: 0.65px;
       margin: 0;
       padding: 0;
-      /* transition: all 0.25s ease-in; */
     }
 
     a:hover {
       text-decoration-style: dashed;
       text-decoration-color: var(--yellow);
-      /* color: var(--red); */
       cursor: grab;
     }
 
@@ -302,7 +313,6 @@ const Contact = styled.footer`
   @media (max-width: 800px) {
     justify-content: flex-start;
     max-width: 95%;
-    height: auto;
 
     h3 {
       line-height: 1;
@@ -333,143 +343,169 @@ export default function Home() {
   const cq = gsap.utils.selector(contactRef);
   const contacttl = useRef();
 
-  useEffect(() => {
-    // gsap.utils.toArray(".panel").forEach((panel, i) => {
-    //   ScrollTrigger.create({
-    //     trigger: panel,
-    //     start: "top top",
-    //     pin: true,
-    //     scrub: 1,
-    //     // markers: true,
-    //     // id: "panel-marker",
+  if (typeof window !== "undefined") {
+    useLayoutEffect(() => {
+      // gsap.utils.toArray(".panel").forEach((panel, i) => {
+      //   ScrollTrigger.create({
+      //     trigger: panel,
+      //     start: "top top",
+      //     pin: true,
+      //     scrub: 1,
+      //     // markers: true,
+      //     // id: "panel-marker",
 
-    //     // base vertical scrolling on how wide the container is so it feels more natural
-    //     end: () => "+=" + containerRef.offsetWidth,
-    //   });
-    // });
+      //     // base vertical scrolling on how wide the container is so it feels more natural
+      //     end: () => "+=" + containerRef.offsetWidth,
+      //   });
+      // });
 
-    // ScrollTrigger.create({
-    //   // to snap the whole page to the closest section
-    //   snap: {
-    //     snapTo: 1 / 2,
-    //     inertia: false,
-    //     duration: { min: 0.25, max: 0.25 },
-    //     ease: "power3.inOut",
-    //   },
-    // });
+      // ScrollTrigger.create({
+      //   // to snap the whole page to the closest section
+      //   snap: {
+      //     snapTo: 1 / 2,
+      //     inertia: false,
+      //     duration: { min: 0.25, max: 0.25 },
+      //     ease: "power3.inOut",
+      //   },
+      // });
 
-    // Header section timeline animations
-    headertl.current = gsap
-      .timeline()
-      .fromTo(
-        hq(".title"),
-        { opacity: 0, x: 200 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.in",
-        }
-      )
-      .fromTo(
-        hq(".about"),
-        { opacity: 0, y: 100 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.in",
-        }
-      )
-      .fromTo(
-        hq(".contactLink"),
-        {
-          opacity: 0,
-          y: -50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: {
-            from: "end",
-            amount: 0.25,
+      // Header section timeline animations
+      headertl.current = gsap
+        .timeline()
+        .fromTo(
+          hq(".title"),
+          { opacity: 0, x: 200 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.in",
+          }
+        )
+        .fromTo(
+          hq(".about"),
+          { opacity: 0, y: 100 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.in",
+          }
+        )
+        .fromTo(
+          hq(".contactLink"),
+          {
+            opacity: 0,
+            y: -50,
           },
-          ease: "power3.in",
-        },
-        "-=0.65"
-      );
-
-    // Services section timeline animations
-    servicestl.current = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".panel2",
-          start: "25% 80%",
-          // markers: true,
-        },
-      })
-      .fromTo(
-        sq(".services"),
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          y: 0,
-          duration: 1,
-          opacity: 1,
-          ease: "power1.inOut",
-        }
-      );
-
-    // Contact section timeline animations
-    contacttl.current = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".panel3",
-          start: "25% 80%",
-          // markers: true,
-        },
-      })
-      .fromTo(
-        cq(".contactTitle"),
-        { opacity: 0, x: 200 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.in",
-        }
-      )
-      .fromTo(
-        cq(".contactText"),
-        { opacity: 0, y: 50 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.in",
-        }
-      )
-      .fromTo(
-        cq(".link"),
-        {
-          opacity: 0,
-          x: 300,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: {
-            // from: "end",
-            amount: 1,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: {
+              from: "end",
+              amount: 0.25,
+            },
+            ease: "power3.in",
           },
-          ease: "power1.in",
-        }
-      );
-  }, []);
+          "-=0.65"
+        );
+
+      // Services section timeline animations
+      servicestl.current = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".service1",
+            start: "0% 80%",
+            // markers: true,
+            // id: "service1",
+          },
+        })
+        .fromTo(
+          sq(".service1"),
+          {
+            opacity: 0,
+            y: 100,
+          },
+          {
+            y: 0,
+            duration: 1,
+            opacity: 1,
+            ease: "power1.inOut",
+          }
+        );
+
+      servicestl.current = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".service2",
+            start: "0% 80%",
+            // markers: true,
+            // id: "service2",
+          },
+        })
+        .fromTo(
+          sq(".service2"),
+          {
+            opacity: 0,
+            y: 100,
+          },
+          {
+            y: 0,
+            duration: 1,
+            opacity: 1,
+            ease: "power1.inOut",
+          }
+        );
+
+      // Contact section timeline animations
+      contacttl.current = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".panel3",
+            start: "25% 80%",
+            // markers: true,
+          },
+        })
+        .fromTo(
+          cq(".contactTitle"),
+          { opacity: 0, x: 200 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.in",
+          }
+        )
+        .fromTo(
+          cq(".contactText"),
+          { opacity: 0, y: 50 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.in",
+          }
+        )
+        .fromTo(
+          cq(".link"),
+          {
+            opacity: 0,
+            x: 300,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: {
+              // from: "end",
+              amount: 1,
+            },
+            ease: "power1.in",
+          }
+        );
+    }, []);
+  }
 
   return (
     <Container ref={containerRef}>
@@ -656,7 +692,7 @@ export default function Home() {
           <img src="/forsythe.jpg" alt="Forsythe" />
         </div>
         <div className="services">
-          <div className="service">
+          <div className="service service1">
             <h2>Services</h2>
             <ul>
               <li>Frontend development</li>
@@ -671,7 +707,7 @@ export default function Home() {
               <li>Project management</li>
             </ul>
           </div>
-          <div className="service">
+          <div className="service service2">
             <h2>Tech stack</h2>
             <ul>
               <li>
