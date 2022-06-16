@@ -511,12 +511,11 @@ export default function Home() {
     <Container ref={containerRef}>
       <Head>
         <title>
-          Jereme Lentz - freelance website developer based in southern New
-          Jersey who focuses on interesting and unique digital experiences
+          Jereme Lentz - South Jersey based Website Designer and Developer
         </title>
         <meta
           name="description"
-          content="Jereme Lentz is a South Jersey based freelance website developer who focuses on creative solutions that will make your brand stand out from the competition."
+          content="Jereme Lentz is a South Jersey based website designer and developer who builds modern, responsive websites for businesses that are ready to step up from the site-builder they built their first website with"
         />
         <link rel="icon" href="/jl-logo.png" />
       </Head>
