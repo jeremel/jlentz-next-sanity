@@ -32,7 +32,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 110vh;
+  min-height: 100vh;
   color: var(--blue);
   position: relative;
   display: flex;
@@ -171,6 +171,7 @@ const Services = styled.section`
 
   .servicesImage {
     grid-area: svcImage;
+    height: 100%;
 
     img {
       height: 100%;
