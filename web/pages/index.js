@@ -44,7 +44,7 @@ const Header = styled.header`
   @media (max-width: 900px) {
     justify-content: flex-start;
     margin-top: 2rem;
-    height: auto;
+    min-height: auto;
   }
 
   .contactLinks {
@@ -166,6 +166,7 @@ const Services = styled.section`
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "svcImage services";
   place-items: right;
+  overflow: hidden;
 
   @media (max-width: 1100px) {
     display: flex;
@@ -176,10 +177,17 @@ const Services = styled.section`
   .servicesImage {
     grid-area: svcImage;
     height: 100%;
+    width: 100%;
+    overflow: hidden;
 
     img {
       height: 100%;
       object-fit: cover;
+      object-position: center;
+    }
+
+    @media (max-width: 500px) {
+      height: 60vh;
     }
   }
 
@@ -423,10 +431,35 @@ export default function Home() {
     servicestl.current = gsap
       .timeline({
         scrollTrigger: {
+          trigger: ".servicesImage",
+          start: "top 40%",
+          end: "40% top",
+          // scrub: true,
+          ease: "power1.easeInOut",
+          // toggleActions: onEnter, onLeave, onEnterBack, onLeaveBack
+          toggleActions: "play reverse play reverse",
+          // markers: true,
+        },
+      })
+      .fromTo(
+        sq(".image"),
+        {
+          scale: 1.2,
+        },
+        {
+          duration: 1,
+          scale: 1,
+          ease: "power1.ease",
+        }
+      );
+
+    servicestl.current = gsap
+      .timeline({
+        scrollTrigger: {
           trigger: ".service1",
           start: "0% 80%",
           // markers: true,
-          // id: "service1",
+          // id: "image",
         },
       })
       .fromTo(
@@ -696,7 +729,7 @@ export default function Home() {
 
       <Services className="panel panel2" ref={servicesRef}>
         <div className="servicesImage">
-          <img src="/forsythe.jpg" alt="Forsythe" />
+          <img src="/forsythe.jpg" alt="Forsythe" className="image" />
         </div>
         <div className="services">
           <div className="service service1">
