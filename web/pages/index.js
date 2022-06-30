@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,6 +55,7 @@ const Header = styled.header`
     flex-direction: column;
     gap: 1rem;
     z-index: 100;
+    visibility: hidden;
 
     a {
       color: var(--blue);
@@ -82,6 +83,7 @@ const Header = styled.header`
   .title {
     display: flex;
     align-items: center;
+    visibility: hidden;
 
     h1 {
       font-size: clamp(4.8rem, 3.8486rem + 4.6126vw, 8rem);
@@ -106,6 +108,8 @@ const Header = styled.header`
   }
 
   .about {
+    visibility: hidden;
+
     p {
       font-size: clamp(1.5rem, 1rem + 2.2222vw, 3rem);
       margin-right: 10rem;
@@ -344,7 +348,7 @@ export default function Home() {
   const cq = gsap.utils.selector(contactRef);
   const contacttl = useRef();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // gsap.utils.toArray(".panel").forEach((panel, i) => {
     //   ScrollTrigger.create({
     //     trigger: panel,
@@ -374,34 +378,38 @@ export default function Home() {
       .timeline()
       .fromTo(
         hq(".title"),
-        { opacity: 0, x: 200 },
+        { opacity: 0, x: 200, autoAlpha: 0 },
         {
           x: 0,
           opacity: 1,
           duration: 1,
           ease: "power3.in",
+          autoAlpha: 1,
         }
       )
       .fromTo(
         hq(".about"),
-        { opacity: 0, y: 100 },
+        { opacity: 0, y: 100, autoAlpha: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 1,
           ease: "power3.in",
+          autoAlpha: 1,
         }
       )
       .fromTo(
-        hq(".contactLink"),
+        hq(".contactLinks"),
         {
           opacity: 0,
           y: -50,
+          autoAlpha: 0,
         },
         {
           opacity: 1,
           y: 0,
           duration: 1,
+          autoAlpha: 1,
           stagger: {
             from: "end",
             amount: 0.25,
@@ -514,7 +522,7 @@ export default function Home() {
         </title>
         <meta
           name="description"
-          content="Jereme Lentz is a South Jersey based website designer and developer who builds modern, responsive websites for businesses that are ready to step up from the site-builder they built their first website with"
+          content="Jereme Lentz is a South Jersey based website designer and developer who builds modern, creative marketing and eCommerce websites for businesses that are ready to step up from the site-builder they built their first website with"
         />
         <link rel="icon" href="/jl-logo.png" />
       </Head>
@@ -660,8 +668,8 @@ export default function Home() {
 
         <div className="about">
           <p>
-            <span className="me">Jereme Lentz</span> is a developer based out of
-            the{" "}
+            <span className="me">Jereme Lentz</span> is a creative developer
+            based out of the{" "}
             <a
               href="https://en.wikipedia.org/wiki/New_Jersey_Pine_Barrens"
               className="pines"
@@ -679,8 +687,9 @@ export default function Home() {
             >
               southern New Jersey
             </a>{" "}
-            who makes modern, responsive websites for businesses and other
-            organizations who are ready to step up their digital presence.
+            who makes modern, responsive marketing and eCommerce websites for
+            businesses and other organizations who are ready to step up their
+            digital presence.
           </p>
         </div>
       </Header>
@@ -716,6 +725,11 @@ export default function Home() {
               <li>
                 <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
                   NextJS
+                </a>
+              </li>
+              <li>
+                <a href="https://svelte.dev/" target="_blank" rel="noreferrer">
+                  Svelte
                 </a>
               </li>
               <li>
@@ -786,8 +800,8 @@ export default function Home() {
         <h3 className="contactTitle">let&apos;s work together</h3>
         <p className="contactText">
           Reach out to me via one of the channels below so we can give your
-          business a fresh, interactive website that won&apos;t blend in with
-          all of the boring template based websites that your competitors use.
+          business a fresh, interactive website that will stand out from all of
+          the boring template based websites that your competitors use.
         </p>
         <div className="myLinks">
           <a href="mailto:jerlentz@gmail.com" className="link">
