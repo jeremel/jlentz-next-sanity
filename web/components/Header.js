@@ -1,7 +1,7 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -162,71 +162,75 @@ export default function Header() {
 
   useEffect(() => {
     // Header section timeline animations
-    headertl.current = gsap
-      .timeline()
-      .fromTo(
-        hq(".title"),
-        { opacity: 0, x: 200, autoAlpha: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.in",
-          autoAlpha: 1,
-        }
-      )
-      .fromTo(
-        hq(".about"),
-        { opacity: 0, y: 100, autoAlpha: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.in",
-          autoAlpha: 1,
-        }
-      )
-      .fromTo(
-        hq(".contactLinks"),
-        {
-          opacity: 0,
-          // y: -50,
-          autoAlpha: 0,
-        },
-        {
-          opacity: 1,
-          // y: 0,
-          duration: 0.5,
-          autoAlpha: 1,
-          //   stagger: {
-          //     from: "end",
-          //     amount: 0.5,
-          //   },
-          //   ease: "power3.in",
-          // },
-          // "-=0.65"
-        }
-      )
-      .fromTo(
-        hq(".contactLink"),
-        {
-          opacity: 0,
-          y: -50,
-          autoAlpha: 0,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          autoAlpha: 1,
-          stagger: {
-            from: "end",
-            amount: 1,
+    let ctx = gsap.context(() => {
+      headertl.current = gsap
+        .timeline()
+        .fromTo(
+          hq(".title"),
+          { opacity: 0, x: 200, autoAlpha: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.in",
+            autoAlpha: 1,
+          }
+        )
+        .fromTo(
+          hq(".about"),
+          { opacity: 0, y: 100, autoAlpha: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.in",
+            autoAlpha: 1,
+          }
+        )
+        .fromTo(
+          hq(".contactLinks"),
+          {
+            opacity: 0,
+            // y: -50,
+            autoAlpha: 0,
           },
-          ease: "bounce.out",
-        },
-        "-=0.65"
-      );
+          {
+            opacity: 1,
+            // y: 0,
+            duration: 0.5,
+            autoAlpha: 1,
+            //   stagger: {
+            //     from: "end",
+            //     amount: 0.5,
+            //   },
+            //   ease: "power3.in",
+            // },
+            // "-=0.65"
+          }
+        )
+        .fromTo(
+          hq(".contactLink"),
+          {
+            opacity: 0,
+            y: -50,
+            autoAlpha: 0,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            autoAlpha: 1,
+            stagger: {
+              from: "end",
+              amount: 1,
+            },
+            ease: "bounce.out",
+          },
+          "-=0.65"
+        );
+    }, headerRef);
+
+    return () => ctx.revert();
   }, [hq]);
 
   return (

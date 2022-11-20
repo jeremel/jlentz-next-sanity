@@ -85,51 +85,55 @@ export default function Contact() {
 
   useEffect(() => {
     // Contact section timeline animations
-    contacttl.current = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".panel3",
-          start: "25% 80%",
-          // markers: true,
-        },
-      })
-      .fromTo(
-        cq(".contactTitle"),
-        { opacity: 0, x: 200 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.in",
-        }
-      )
-      .fromTo(
-        cq(".contactText"),
-        { opacity: 0, y: 50 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.in",
-        }
-      )
-      .fromTo(
-        cq(".link"),
-        {
-          opacity: 0,
-          x: 300,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: {
-            // from: "end",
-            amount: 1,
+    let ctx = gsap.context(() => {
+      contacttl.current = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".panel3",
+            start: "25% 80%",
+            // markers: true,
           },
-          ease: "power1.in",
-        }
-      );
+        })
+        .fromTo(
+          cq(".contactTitle"),
+          { opacity: 0, x: 200 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.in",
+          }
+        )
+        .fromTo(
+          cq(".contactText"),
+          { opacity: 0, y: 50 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.in",
+          }
+        )
+        .fromTo(
+          cq(".link"),
+          {
+            opacity: 0,
+            x: 300,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: {
+              // from: "end",
+              amount: 1,
+            },
+            ease: "power1.in",
+          }
+        );
+    }, contactRef);
+
+    return () => ctx.revert();
   }, [cq]);
 
   return (

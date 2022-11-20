@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.section`
   background: var(--blue);
@@ -160,9 +164,18 @@ const data = [
 
 export default function Portfolio() {
   const [isHovered, setIsHovered] = useState(false);
+  const portfolioRef = useRef(null);
+  const pq = gsap.utils.selector(portfolioRef);
+  const portfoliotl = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {}, portfolioRef);
+
+    return () => ctx.revert();
+  }, [pq]);
 
   return (
-    <Container>
+    <Container ref={portfolioRef}>
       <div className="innerContainer">
         <h2>Recent Work</h2>
         <h3>*hover name for preview</h3>
