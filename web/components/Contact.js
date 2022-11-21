@@ -91,8 +91,8 @@ export default function Contact() {
           scrollTrigger: {
             trigger: ".contactTitle",
             start: "25% 80%",
-            markers: true,
-            id: "contact-trigger",
+            // markers: true,
+            // id: "contact-trigger",
           },
         })
         .fromTo(

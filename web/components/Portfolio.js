@@ -172,21 +172,50 @@ export default function Portfolio() {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      gsap.fromTo(
-        pq(".portfolio__title"),
-        {
-          opacity: 0,
-          x: 200,
-          autoAlpha: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.in",
-          autoAlpha: 1,
-        }
-      );
+      portfoliotl.current = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".portfolio__title",
+            start: "25% 80%",
+            // markers: true,
+            // id: "portfolio-trigger",
+          },
+        })
+        .fromTo(
+          pq(".portfolio__title"),
+          {
+            opacity: 0,
+            x: 200,
+            autoAlpha: 0,
+          },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.in",
+            autoAlpha: 1,
+          }
+        )
+        .fromTo(
+          pq(".portfolio__item"),
+          {
+            autoAlpha: 0,
+            opacity: 0,
+            y: 100,
+          },
+          {
+            autoAlpha: 1,
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: {
+              from: "start",
+              amount: 1,
+            },
+            ease: "linear",
+          },
+          "+=0.25"
+        );
     }, portfolioRef);
 
     return () => ctx.revert();
