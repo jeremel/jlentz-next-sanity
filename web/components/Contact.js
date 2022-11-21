@@ -89,9 +89,10 @@ export default function Contact() {
       contacttl.current = gsap
         .timeline({
           scrollTrigger: {
-            trigger: ".panel3",
+            trigger: ".contactTitle",
             start: "25% 80%",
-            // markers: true,
+            markers: true,
+            id: "contact-trigger",
           },
         })
         .fromTo(
@@ -137,7 +138,7 @@ export default function Contact() {
   }, [cq]);
 
   return (
-    <Container className="panel panel3" ref={contactRef}>
+    <Container className="contactContainer" ref={contactRef}>
       <h3 className="contactTitle">let&apos;s work together</h3>
       <p className="contactText">
         Reach out via one of the channels below to see how we can give your

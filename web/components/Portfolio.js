@@ -22,24 +22,26 @@ const Container = styled.section`
     flex-direction: column;
     justify-content: center;
 
-    h2 {
-      font-size: clamp(4rem, 3.4054rem + 2.8829vw, 6rem);
-      margin: 0;
-      padding: 0;
-      line-height: 1;
-    }
+    .portfolio__title {
+      h2 {
+        font-size: clamp(4rem, 3.4054rem + 2.8829vw, 6rem);
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+      }
 
-    h3 {
-      margin: 0;
-      padding: 0;
-      font-size: 1rem;
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-
-    @media (max-width: 1000px) {
       h3 {
-        display: none;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      @media (max-width: 1000px) {
+        h3 {
+          display: none;
+        }
       }
     }
 
@@ -169,7 +171,23 @@ export default function Portfolio() {
   const portfoliotl = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {}, portfolioRef);
+    let ctx = gsap.context(() => {
+      gsap.fromTo(
+        pq(".portfolio__title"),
+        {
+          opacity: 0,
+          x: 200,
+          autoAlpha: 0,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.in",
+          autoAlpha: 1,
+        }
+      );
+    }, portfolioRef);
 
     return () => ctx.revert();
   }, [pq]);
@@ -177,8 +195,10 @@ export default function Portfolio() {
   return (
     <Container ref={portfolioRef}>
       <div className="innerContainer">
-        <h2>Recent Work</h2>
-        <h3>*hover name for preview</h3>
+        <div className="portfolio__title">
+          <h2>Recent Work</h2>
+          <h3>*hover name for preview</h3>
+        </div>
 
         <div className="portfolio__wrapper">
           {data &&
