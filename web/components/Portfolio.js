@@ -26,16 +26,16 @@ const Container = styled.section`
       h2 {
         font-size: clamp(4rem, 3.4054rem + 2.8829vw, 6rem);
         margin: 0;
+        /* margin-bottom: 1.5rem; */
         padding: 0;
         line-height: 1;
       }
 
       h3 {
-        margin: 0;
         padding: 0;
         font-size: 1rem;
         font-style: italic;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
       }
 
       @media (max-width: 1000px) {
@@ -106,9 +106,11 @@ const Container = styled.section`
 
         .portfolio__image {
           position: absolute;
-          left: clamp(5rem, -3.75rem + 38.8889vw, 31.25rem);
-          bottom: -75%;
+          /* left: clamp(5rem, -3.75rem + 38.8889vw, 31.25rem); */
+          left: 65%;
+          bottom: 0;
           z-index: 2;
+          max-width: 600px;
 
           @media (max-width: 1000px) {
             /* bottom: 0; */
@@ -170,56 +172,57 @@ export default function Portfolio() {
   const pq = gsap.utils.selector(portfolioRef);
   const portfoliotl = useRef(null);
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      portfoliotl.current = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".portfolio__title",
-            start: "25% 80%",
-            // markers: true,
-            // id: "portfolio-trigger",
-          },
-        })
-        .fromTo(
-          pq(".portfolio__title"),
-          {
-            opacity: 0,
-            x: 200,
-            autoAlpha: 0,
-          },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power3.in",
-            autoAlpha: 1,
-          }
-        )
-        .fromTo(
-          pq(".portfolio__item"),
-          {
-            autoAlpha: 0,
-            opacity: 0,
-            y: 100,
-          },
-          {
-            autoAlpha: 1,
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            stagger: {
-              from: "start",
-              amount: 1,
-            },
-            ease: "linear",
-          },
-          "+=0.25"
-        );
-    }, portfolioRef);
+  // useEffect(() => {
+  //   let ctx = gsap.context(() => {
+  //     portfoliotl.current = gsap
+  //       .timeline({
+  //         scrollTrigger: {
+  //           trigger: ".portfolio__title",
+  //           start: "25% 80%",
+  //           // markers: true,
+  //           // id: "portfolio-trigger",
+  //           refreshPriority: 1,
+  //         },
+  //       })
+  //       .fromTo(
+  //         pq(".portfolio__title"),
+  //         {
+  //           opacity: 0,
+  //           x: 200,
+  //           autoAlpha: 0,
+  //         },
+  //         {
+  //           x: 0,
+  //           opacity: 1,
+  //           duration: 0.8,
+  //           ease: "power3.in",
+  //           autoAlpha: 1,
+  //         }
+  //       )
+  //       .fromTo(
+  //         pq(".portfolio__item"),
+  //         {
+  //           autoAlpha: 0,
+  //           opacity: 0,
+  //           y: 100,
+  //         },
+  //         {
+  //           autoAlpha: 1,
+  //           opacity: 1,
+  //           y: 0,
+  //           duration: 0.4,
+  //           stagger: {
+  //             from: "start",
+  //             amount: 1,
+  //           },
+  //           ease: "linear",
+  //         },
+  //         "+=0.25"
+  //       );
+  //   }, portfolioRef);
 
-    return () => ctx.revert();
-  }, [pq]);
+  //   return () => ctx.revert();
+  // }, [pq]);
 
   return (
     <Container ref={portfolioRef}>
@@ -231,7 +234,7 @@ export default function Portfolio() {
 
         <div className="portfolio__wrapper">
           {data &&
-            data.map((item, i) => (
+            data.map((item) => (
               <section className="portfolio__item" key={item.id}>
                 <div
                   className="portfolio__title__services"
@@ -251,7 +254,7 @@ export default function Portfolio() {
 
                 {isHovered === item.id && (
                   <div className="portfolio__image">
-                    <img src={item.image} alt={item.alt} />
+                    <img src={item.image} alt={item.alt} loading="lazy" />
                   </div>
                 )}
               </section>
