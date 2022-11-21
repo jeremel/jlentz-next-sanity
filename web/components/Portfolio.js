@@ -136,7 +136,7 @@ const data = [
     services: "Design, Development",
     description:
       "Full redesign of a WordPress website to a Next.js website with Sanity as the CMS.",
-    image: "/doerler-homepage-header.png",
+    image: "/doerler-homepage-header.jpg",
     alt: "Doerler Landscapes & Hidden Springs Irrigation Homepage Screenshot",
     link: "https://www.doerler.com",
   },
@@ -148,7 +148,7 @@ const data = [
     services: "Design, Development",
     description:
       "A simple website with a contact form for my small business consulting website.",
-    image: "/jlentzconsulting-header.png",
+    image: "/jlentzconsulting-header.jpg",
     alt: "JLentz Consulting Homepage Screenshot",
     link: "https://www.jlentzconsulting.com",
   },
@@ -160,7 +160,7 @@ const data = [
     services: "Design, Development",
     description:
       "A website created to highlight my photography. The frontend was built out using Next.js with Styled Components and Sanity was used as the CMS.",
-    image: "/jlentzphoto-homepage-header.png",
+    image: "/jlentzphoto-homepage-header.jpg",
     alt: "Jereme Lentz Photography Homepage Screenshot",
     link: "https://www.jeremelentzphotography.com",
   },
