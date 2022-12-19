@@ -35,6 +35,16 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="stylesheet" href="https://use.typekit.net/yhj4ggk.css" />
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          `,
+            }}
+          />
         </Head>
         <body>
           <Main />
