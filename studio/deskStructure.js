@@ -21,8 +21,11 @@ export default () =>
   S.list()
     .title("Content")
     .items([
+      S.documentTypeListItem("homepage"),
+      S.documentTypeListItem("page"),
       S.documentTypeListItem("post"),
       S.divider(),
       S.documentTypeListItem("author"),
       S.documentTypeListItem("category"),
+      S.documentTypeListItem("project"),
     ]);

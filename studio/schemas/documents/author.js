@@ -1,10 +1,10 @@
-import { FcAutomotive } from "react-icons/fc";
+import { FcConferenceCall } from "react-icons/fc";
 
 export default {
   name: "author",
   title: "Author",
   type: "document",
-  icon: FcAutomotive,
+  icon: FcConferenceCall,
   fields: [
     {
       name: "name",

@@ -2,7 +2,7 @@ import { FcLandscape } from "react-icons/fc";
 
 export default {
   name: "post",
-  title: "Posts",
+  title: "Blog Posts",
   type: "document",
   icon: FcLandscape,
   fields: [

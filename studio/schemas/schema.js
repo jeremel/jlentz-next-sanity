@@ -5,11 +5,17 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // We import object and document schemas
-import blockContent from "./blockContent";
-import category from "./category";
-import post from "./post";
-import author from "./author";
-import asset from "./asset";
+import asset from "./objects/asset";
+import author from "./documents/author";
+import blockContent from "./objects/blockContent";
+import category from "./documents/category";
+import homeContact from "./modules/homeContact";
+import homeHeader from "./modules/homeHeader";
+import homepage from "./documents/homepage";
+import page from "./documents/page";
+import post from "./documents/post";
+import projects from "./modules/projects";
+import project from "./documents/project";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -20,12 +26,19 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
-    post,
     author,
     category,
+    homeContact,
+    homeHeader,
+    homepage,
+    page,
+    post,
+    projects,
+    project,
+
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
-    blockContent,
     asset,
+    blockContent,
   ]),
 });
