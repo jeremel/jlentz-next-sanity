@@ -57,14 +57,14 @@ export default {
         source: "title",
       },
       group: "seo",
-      description: "Will also be used as for the og:title property",
+      description: "Will also be used for the og:title property",
     },
     {
       name: "metaDescription",
       title: "Meta Description",
       type: "string",
       group: "seo",
-      description: "Will also be used as for the og:title property",
+      description: "Will also be used for the og:title property",
     },
     {
       name: "metaURL",
