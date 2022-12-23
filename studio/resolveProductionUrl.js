@@ -4,7 +4,7 @@
 const previewSecret = "08401-sanity-08215";
 
 // Replace `remoteUrl` with your deployed Next.js site
-const remoteUrl = `https://your-nextjs-site.com`;
+const remoteUrl = `https://www.jeremelentz.com/`;
 const localUrl = `http://localhost:3000`;
 
 export default function resolveProductionUrl(doc) {
@@ -17,8 +17,11 @@ export default function resolveProductionUrl(doc) {
   previewUrl.searchParams.append(`secret`, previewSecret);
 
   switch (doc._type) {
+    case "homepage":
+      previewUrl.searchParams.append(`slug`, " ");
+      break;
     case "post":
-      previewUrl.searchParams.append(`slug`, `journal/${doc?.slug?.current}`);
+      previewUrl.searchParams.append(`slug`, `blog/${doc?.slug?.current}`);
       break;
     default:
       previewUrl.searchParams.append(`slug`, doc?.slug?.current ?? `/`);

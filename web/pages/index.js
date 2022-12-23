@@ -1,16 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import styled from "styled-components";
 
 import { groq } from "next-sanity";
-import { usePreviewSubscription, urlFor } from "../lib/sanity";
+import { usePreviewSubscription } from "../lib/sanity";
 import { getClient } from "../lib/sanity.server";
 
-import Header from "../components/Header";
-import Contact from "../components/Contact";
-import Portfolio from "../components/Portfolio";
-import Link from "next/link";
 import Module from "../components/Module";
 
 // gsap.registerPlugin(ScrollTrigger);
@@ -88,7 +85,7 @@ export default function Home({ data, preview }) {
     return <ErrorPage statusCode={404} />;
   }
 
-  const { _id, title, metaTitle, metaDescription, modules } = homepage;
+  const { title, metaTitle, metaDescription, modules } = homepage;
 
   // console.log(modules);
 
