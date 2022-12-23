@@ -4,7 +4,7 @@ export default {
   name: "homepage",
   title: "Home Page",
   type: "document",
-  __experimental_actions: ["create", "update", /*'delete',*/ "publish"],
+  __experimental_actions: [/*"create"*/ "update", /*'delete',*/ "publish"],
   groups: [
     {
       name: "main",
@@ -56,16 +56,6 @@ export default {
       type: "string",
       group: "seo",
       description: "Will also be used as for the og:title property",
-    },
-    {
-      name: "metaURL",
-      title: "Meta URL",
-      type: "slug",
-      options: {
-        source: "slug",
-      },
-      group: "seo",
-      description: "Will be used for the og:url property",
     },
     {
       name: "metaImage",

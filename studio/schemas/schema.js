@@ -9,6 +9,7 @@ import asset from "./objects/asset";
 import author from "./documents/author";
 import blockContent from "./objects/blockContent";
 import category from "./documents/category";
+import externalLink from "./objects/externalLink";
 import homeContact from "./modules/homeContact";
 import homeHeader from "./modules/homeHeader";
 import homepage from "./documents/homepage";
@@ -40,5 +41,6 @@ export default createSchema({
     // { type: 'typename' } in other document schemas
     asset,
     blockContent,
+    externalLink,
   ]),
 });

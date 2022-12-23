@@ -2,7 +2,7 @@ export default {
   name: "homeContact",
   title: "Homepage Contact Component",
   type: "document",
-  __experimental_actions: ["create", "update", /*'delete',*/ "publish"],
+  __experimental_actions: ["create", "update", "delete", "publish"],
   fields: [
     {
       name: "title",
@@ -16,11 +16,23 @@ export default {
       type: "blockContent",
       description: "This is where the Contact component text goes",
     },
+    {
+      name: "contactLinks",
+      title: "Contact Links",
+      type: "array",
+      of: [
+        {
+          type: "externalLink",
+        },
+      ],
+    },
   ],
 
   preview: {
-    select: {
-      title: "title",
+    prepare() {
+      return {
+        title: "Homepage Contact Component",
+      };
     },
   },
 };

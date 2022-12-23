@@ -19,8 +19,10 @@ export default {
   ],
 
   preview: {
-    select: {
-      title: "title",
+    prepare() {
+      return {
+        title: "Homepage Header Component",
+      };
     },
   },
 };

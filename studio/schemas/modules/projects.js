@@ -35,8 +35,10 @@ export default {
   ],
 
   preview: {
-    select: {
-      title: "title",
+    prepare() {
+      return {
+        title: "Projects Component",
+      };
     },
   },
 };
