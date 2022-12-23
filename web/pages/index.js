@@ -1,11 +1,17 @@
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import styled from "styled-components";
 
+import { groq } from "next-sanity";
+import { usePreviewSubscription, urlFor } from "../lib/sanity";
+import { getClient } from "../lib/sanity.server";
+
 import Header from "../components/Header";
-import Services from "../components/Services";
 import Contact from "../components/Contact";
 import Portfolio from "../components/Portfolio";
+import Link from "next/link";
+import Module from "../components/Module";
 
 // gsap.registerPlugin(ScrollTrigger);
 
@@ -32,15 +38,64 @@ const Container = styled.div`
   }
 `;
 
-export default function Home() {
+const ExitPreview = styled.div`
+  position: fixed;
+  left: 25px;
+  bottom: 25px;
+  background: darkcyan;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 2.2px 4.3px 4.3px hsl(0deg 0% 0% / 0.43);
+  a {
+    color: white;
+    font-size: 1rem;
+  }
+`;
+
+const homePageQuery = groq`
+  *[_type == "homepage"][0]{
+    _id,
+    title,
+    metaTitle,
+    metaDescription,
+    // modules,
+    modules[]{
+       _type == "homeHeader" => {
+       ...,
+        },
+      _type == "projects" => {
+       ...,
+         projectArray[]->,
+        },
+      _type == "homeContact" => {
+       ...,
+        },
+     }
+  }
+`;
+
+export default function Home({ data, preview }) {
+  const router = useRouter();
   const containerRef = useRef();
+
+  const { data: homepage } = usePreviewSubscription(homePageQuery, {
+    params: data.homepage,
+    initialData: data.homepage,
+    enabled: preview && data.homepage,
+  });
+
+  if (!router.isFallback && !data.homepage) {
+    return <ErrorPage statusCode={404} />;
+  }
+
+  const { _id, title, metaTitle, metaDescription, modules } = homepage;
+
+  // console.log(modules);
 
   return (
     <Container ref={containerRef}>
       <Head>
-        <title>
-          Jereme Lentz - South Jersey based Website Designer and Developer
-        </title>
+        {title && <title>{title}</title>}
         <meta
           name="description"
           content="Jereme Lentz is a South Jersey based creative website designer and developer who builds modern, creative marketing and eCommerce websites for businesses that are ready to step up their digital presence"
@@ -48,10 +103,27 @@ export default function Home() {
         <link rel="icon" href="/jl-logo.png" />
       </Head>
 
-      <Header />
-      <Portfolio />
-      {/* <Services /> */}
-      <Contact />
+      {/* Where the module components defined in Sanity are rendered */}
+      <Module modules={modules} />
+
+      {preview && (
+        <ExitPreview>
+          <Link href="/api/exit-preview">Exit Preview</Link>
+        </ExitPreview>
+      )}
     </Container>
   );
+}
+
+export async function getStaticProps({ preview = false }) {
+  let homepage = await getClient(preview).fetch(homePageQuery);
+
+  return {
+    props: {
+      preview,
+      // data: homepage || null,
+      data: { homepage },
+    },
+    revalidate: 60,
+  };
 }

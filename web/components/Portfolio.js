@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { urlFor } from "../lib/sanity";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -127,50 +128,12 @@ const Container = styled.section`
   }
 `;
 
-const data = [
-  {
-    id: 1,
-    name: "Doerler Landscapes",
-    year: "2022",
-    stack: "Next.js, Sanity CMS, Framer Motion, Vercel",
-    services: "Design, Development",
-    description:
-      "Full redesign of a WordPress website to a Next.js website with Sanity as the CMS.",
-    image: "/doerler-homepage-header.jpg",
-    alt: "Doerler Landscapes & Hidden Springs Irrigation Homepage Screenshot",
-    link: "https://www.doerler.com",
-  },
-  {
-    id: 2,
-    name: "JLentz Consulting",
-    year: "2022",
-    stack: "Next.js, GSAP, Lenis, Vercel",
-    services: "Design, Development",
-    description:
-      "A simple website with a contact form for my small business consulting website.",
-    image: "/jlentzconsulting-header.jpg",
-    alt: "JLentz Consulting Homepage Screenshot",
-    link: "https://www.jlentzconsulting.com",
-  },
-  {
-    id: 3,
-    name: "Jereme Lentz Photography",
-    year: "2022",
-    stack: "Next.js, Sanity CMS, GSAP, Vercel",
-    services: "Design, Development",
-    description:
-      "A website created to highlight my photography. The frontend was built out using Next.js with Styled Components and Sanity was used as the CMS.",
-    image: "/jlentzphoto-homepage-header.jpg",
-    alt: "Jereme Lentz Photography Homepage Screenshot",
-    link: "https://www.jeremelentzphotography.com",
-  },
-];
-
-export default function Portfolio() {
+export default function Portfolio({ title, subtitle, projectArray }) {
   const [isHovered, setIsHovered] = useState(false);
   const portfolioRef = useRef(null);
-  const pq = gsap.utils.selector(portfolioRef);
-  const portfoliotl = useRef(null);
+
+  // const pq = gsap.utils.selector(portfolioRef);
+  // const portfoliotl = useRef(null);
 
   // useEffect(() => {
   //   let ctx = gsap.context(() => {
@@ -228,33 +191,37 @@ export default function Portfolio() {
     <Container ref={portfolioRef}>
       <div className="innerContainer">
         <div className="portfolio__title">
-          <h2>Recent Work</h2>
-          <h3>*hover name for preview</h3>
+          {title && <h2>{title}</h2>}
+          {subtitle && <h3>{subtitle}</h3>}
         </div>
 
         <div className="portfolio__wrapper">
-          {data &&
-            data.map((item) => (
-              <section className="portfolio__item" key={item.id}>
+          {projectArray &&
+            projectArray.map((project) => (
+              <section className="portfolio__item" key={project._id}>
                 <div
                   className="portfolio__title__services"
-                  onMouseOver={() => setIsHovered(item.id)}
+                  onMouseOver={() => setIsHovered(project._id)}
                   onMouseOut={() => setIsHovered(false)}
                 >
                   <p>
-                    <a href={item.link}>{item.name}</a>
+                    <a href={project.webAddress}>{project.title}</a>
                   </p>
-                  <p>{item.services}</p>
+                  <p>{project.services}</p>
                 </div>
 
                 <div className="portfolio__year__stack">
-                  <p>{item.year}</p>
-                  <p>{item.stack}</p>
+                  <p>{project.completed}</p>
+                  <p>{project.stack}</p>
                 </div>
 
-                {isHovered === item.id && (
+                {isHovered === project._id && (
                   <div className="portfolio__image">
-                    <img src={item.image} alt={item.alt} loading="lazy" />
+                    <img
+                      src={urlFor(project.previewImage.image).url()}
+                      alt={project.previewImage.alt}
+                      loading="lazy"
+                    />
                   </div>
                 )}
               </section>

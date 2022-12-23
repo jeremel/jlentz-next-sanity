@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { PortableText } from "@portabletext/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -134,6 +135,21 @@ const Container = styled.header`
           cursor: pointer;
         }
       }
+
+      .linkStyle {
+        text-decoration: underline;
+        text-decoration-style: dashed;
+        color: var(--blue);
+        text-underline-offset: 4px;
+        transition: all 0.2s ease-out;
+        font-style: italic;
+
+        &:hover {
+          color: var(--yellow);
+          text-decoration-color: var(--yellow);
+          cursor: pointer;
+        }
+      }
     }
 
     .hover-img {
@@ -154,7 +170,27 @@ const Container = styled.header`
   }
 `;
 
-export default function Header() {
+const components = {
+  marks: {
+    link: ({ value, children }) => {
+      return (
+        <a
+          href={value.href}
+          className="linkStyle"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {children}
+        </a>
+      );
+    },
+    span: ({ children }) => {
+      return <span className="me">{children}</span>;
+    },
+  },
+};
+
+export default function Header({ title, body }) {
   // Header section timeline
   const headerRef = useRef(null);
   const hq = gsap.utils.selector(headerRef);
@@ -235,10 +271,14 @@ export default function Header() {
 
   return (
     <Container className="panel" ref={headerRef}>
-      <div className="title">
-        <h1>jereme lentz</h1>
-      </div>
+      {/* Header Title */}
+      {title && (
+        <div className="title">
+          <h1>{title}</h1>
+        </div>
+      )}
 
+      {/* Contact links */}
       <div className="contactLinks">
         {/* Email */}
         <a
@@ -410,35 +450,12 @@ export default function Header() {
         </a>
       </div>
 
-      <div className="about">
-        <p>
-          <span className="me">Jereme Lentz</span> is a creative developer based
-          out of the{" "}
-          <a
-            href="https://en.wikipedia.org/wiki/New_Jersey_Pine_Barrens"
-            className="pines"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Pine Barrens
-          </a>{" "}
-          of{" "}
-          <a
-            href="https://en.wikipedia.org/wiki/South_Jersey"
-            className="jerz"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Southern New Jersey
-          </a>{" "}
-          who makes modern, responsive marketing and eCommerce websites for
-          businesses and other organizations who are ready to step up their
-          digital presence.
-        </p>
-        <div className="hover-img">
-          <img src="/jereme-lentz.jpg" alt="Jereme Lentz" />
+      {/* Body content */}
+      {body && (
+        <div className="about">
+          {body && <PortableText value={body} components={components} />}
         </div>
-      </div>
+      )}
     </Container>
   );
 }

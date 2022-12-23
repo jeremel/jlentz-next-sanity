@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { PortableText } from "@portabletext/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,11 +78,13 @@ const Container = styled.footer`
   }
 `;
 
-export default function Contact() {
+export default function Contact({ title, body, contactLinks }) {
   // Contact section timeline
   const contactRef = useRef();
   const cq = gsap.utils.selector(contactRef);
   const contacttl = useRef();
+
+  // console.log(contactLinks);
 
   useEffect(() => {
     // Contact section timeline animations
@@ -139,48 +142,33 @@ export default function Contact() {
 
   return (
     <Container className="contactContainer" ref={contactRef}>
-      <h3 className="contactTitle">let&apos;s work together</h3>
-      <p className="contactText">
-        Reach out via one of the channels below to see how we can give your
-        business a fresh, interactive website that will stand out from all of
-        the boring template based websites that your competitors use.
-      </p>
+      {title && <h3 className="contactTitle">{title}</h3>}
+
+      {body && (
+        <div className="contactText">
+          <PortableText value={body} />
+        </div>
+      )}
+
       <div className="myLinks">
-        <a href="mailto:jerlentz@gmail.com" className="link">
-          jerlentz@gmail.com
-        </a>
-        <a
-          href="https://twitter.com/jereme_l"
-          target="_blank"
-          rel="noreferrer"
-          className="link"
-        >
-          twitter
-        </a>
-        <a
-          href="https://www.instagram.com/jeremel/"
-          target="_blank"
-          rel="noreferrer"
-          className="link"
-        >
-          instagram
-        </a>
-        <a
-          href="https://www.linkedin.com/in/jereme-lentz-03560ab6/"
-          target="_blank"
-          rel="noreferrer"
-          className="link"
-        >
-          linkedin
-        </a>
-        <a
-          href="https://github.com/jeremel"
-          target="_blank"
-          rel="noreferrer"
-          className="link"
-        >
-          github
-        </a>
+        {contactLinks &&
+          contactLinks.map((contactLink) => (
+            <a
+              href={
+                contactLink.linkType == "mailto:"
+                  ? `mailto:` + contactLink.linkAddress
+                  : contactLink.linkType == "tel:"
+                  ? `tel:` + contactLink.linkAddress
+                  : contactLink.linkAddress
+              }
+              className="link"
+              rel="noreferrer"
+              target="_blank"
+              key={contactLink._key}
+            >
+              {contactLink.linkText}
+            </a>
+          ))}
       </div>
     </Container>
   );
