@@ -67,26 +67,6 @@ export default {
       group: "seo",
       description: "Will be used for the og:img property",
     },
-    {
-      name: "metaType",
-      title: "Meta Type",
-      type: "string",
-      options: {
-        list: [
-          {
-            title: "Website",
-            value: "website",
-          },
-          {
-            title: "Article",
-            value: "article",
-          },
-        ],
-      },
-      group: "seo",
-      description:
-        "Will be used for the og:type property. Use 'Article' for Blog posts and 'Website' for all other pages.",
-    },
   ],
 
   preview: {
