@@ -62,7 +62,16 @@ const homePageQuery = groq`
         },
       _type == "projects" => {
        ...,
-         projectArray[]->,
+         projectArray[]->{
+          ...,
+          previewImage{
+            ...,
+            image{
+              ...,
+              asset->,
+            },
+          },
+         },
         },
       _type == "homeContact" => {
        ...,

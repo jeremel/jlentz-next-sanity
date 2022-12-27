@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { urlFor } from "../lib/sanity";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -187,6 +188,8 @@ export default function Portfolio({ title, subtitle, projectArray }) {
   //   return () => ctx.revert();
   // }, [pq]);
 
+  // console.log(projectArray[0].previewImage.image.asset.metadata);
+
   return (
     <Container ref={portfolioRef}>
       <div className="innerContainer">
@@ -217,10 +220,25 @@ export default function Portfolio({ title, subtitle, projectArray }) {
 
                 {isHovered === project._id && (
                   <div className="portfolio__image">
-                    <img
+                    <Image
                       src={urlFor(project.previewImage.image).url()}
                       alt={project.previewImage.alt}
-                      loading="lazy"
+                      width={
+                        project.previewImage.image.asset.metadata.dimensions
+                          .width
+                      }
+                      height={
+                        project.previewImage.image.asset.metadata.dimensions
+                          .height
+                      }
+                      placeholder="blur"
+                      blurDataURL={
+                        project.previewImage.image.asset.metadata.lqip
+                      }
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
                     />
                   </div>
                 )}
