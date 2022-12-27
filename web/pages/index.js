@@ -102,10 +102,13 @@ export default function Home({ data, preview }) {
     <Container ref={containerRef}>
       <Head>
         {title && <title>{title}</title>}
-        <meta
-          name="description"
-          content="Jereme Lentz is a South Jersey based creative website designer and developer who builds modern, creative marketing and eCommerce websites for businesses that are ready to step up their digital presence"
-        />
+
+        {metaTitle && <meta name="title" content={metaTitle} />}
+
+        {metaDescription && (
+          <meta name="description" content={metaDescription} />
+        )}
+
         <link rel="icon" href="/jl-logo.png" />
       </Head>
 

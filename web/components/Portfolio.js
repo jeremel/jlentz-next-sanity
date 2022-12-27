@@ -223,6 +223,7 @@ export default function Portfolio({ title, subtitle, projectArray }) {
                     <Image
                       src={urlFor(project.previewImage.image).url()}
                       alt={project.previewImage.alt}
+                      priority
                       width={
                         project.previewImage.image.asset.metadata.dimensions
                           .width
