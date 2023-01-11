@@ -208,7 +208,13 @@ export default function Portfolio({ title, subtitle, projectArray }) {
                   onMouseOut={() => setIsHovered(false)}
                 >
                   <p>
-                    <a href={project.webAddress}>{project.title}</a>
+                    <a
+                      href={project.webAddress}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {project.title}
+                    </a>
                   </p>
                   <p>{project.services}</p>
                 </div>
