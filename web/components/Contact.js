@@ -162,7 +162,7 @@ export default function Contact({ title, body, contactLinks }) {
                   : contactLink.linkAddress
               }
               className="link"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               target="_blank"
               key={contactLink._key}
             >

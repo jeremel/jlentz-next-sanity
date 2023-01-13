@@ -211,7 +211,7 @@ export default function Portfolio({ title, subtitle, projectArray }) {
                     <a
                       href={project.webAddress}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       {project.title}
                     </a>

@@ -178,7 +178,7 @@ const components = {
           href={value.href}
           className="linkStyle"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           {children}
         </a>
