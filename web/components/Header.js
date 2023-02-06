@@ -282,9 +282,9 @@ export default function Header({ title, body }) {
       <div className="contactLinks">
         {/* Email */}
         <a
-          href="mailto:jerlentz@gmail.com"
+          href="mailto:hi@jeremelentz.com"
           className="contactLink"
-          aria-label="Email: jerlentz@gmail.com"
+          aria-label="Email: hi@jeremelentz.com"
         >
           <svg
             width="36"
